@@ -16,7 +16,9 @@ class GroqService {
     return _singleton;
   }
 
-  final _groq = Groq(const String.fromEnvironment('groqApiKey'));
+  final _groq = Groq('');
+
+  //const String.fromEnvironment('groqApiKey'),
 
   Future<GroqChat> startChat((String, String) bFFDetials,
       [String model = GroqModels.gemma2_9b]) async {

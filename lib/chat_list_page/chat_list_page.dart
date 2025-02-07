@@ -80,12 +80,16 @@ class _ChatListPageState extends State<ChatListPage> {
           _service.chats.add((title: details.$1, subtitle: details.$2));
           final chat = await _gService.startChat(details);
           if (context.mounted) {
-            Navigator.push(
+            await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ChatPage(chat: chat),
+                builder: (context) => ChatPage(
+                  chat: chat,
+                  name: details.$1,
+                ),
               ),
             );
+            setState(() {});
           }
         },
         label: Row(
@@ -104,6 +108,7 @@ class _ChatListPageState extends State<ChatListPage> {
                   subtitle: Text(chatDetails.subtitle),
                   leading: Icon(Icons.person),
                   onTap: () {},
+                  tileColor: Theme.of(context).colorScheme.onPrimary,
                 );
               },
               separatorBuilder: (context, index) => SizedBox(height: 10),

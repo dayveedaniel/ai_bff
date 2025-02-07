@@ -15,9 +15,14 @@ String randomString() {
 }
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key, required this.chat});
+  const ChatPage({
+    super.key,
+    required this.chat,
+    required this.name,
+  });
 
   final GroqChat chat;
+  final String name;
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -31,13 +36,20 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(widget.name),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.person),
+            )
+          ],
+        ),
         body: StreamBuilder<ChatEvent>(
             stream: widget.chat.stream,
             builder: (context, chatEvent) {
               chatEvent.data?.when(
-                request: (event) {
-                  print(event.message.toString());
-                },
+                request: (event) {},
                 response: (event) {
                   final textMessage = types.TextMessage(
                     author: _ai,
@@ -49,7 +61,6 @@ class _ChatPageState extends State<ChatPage> {
                 },
               );
               return Chat(
-                customBottomWidget: ,
                 messages: _messages,
                 onSendPressed: _handleSendPressed,
                 onAttachmentPressed: () {},
@@ -59,9 +70,7 @@ class _ChatPageState extends State<ChatPage> {
       );
 
   void _addMessage(types.Message message) {
-    setState(() {
-      _messages.insert(0, message);
-    });
+    _messages.insert(0, message);
   }
 
   void _handleSendPressed(types.PartialText message) {

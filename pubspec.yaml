@@ -24,8 +24,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_chat_ui: ^1.6.15
   groq_sdk: ^1.0.2
-  groq: ^1.0.0
-
 
 dev_dependencies:
   flutter_test:

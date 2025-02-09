@@ -8,4 +8,6 @@ class ChatListService {
   factory ChatListService() => _singleton;
 
   List<ChatListDetails> chats = [];
+
+  Map<String, List<String>> messageCache = {};
 }

@@ -80,6 +80,7 @@ class _ChatListPageState extends State<ChatListPage> {
           _service.chats.add((title: details.$1, subtitle: details.$2));
           final chat = await _gService.startChat(details);
           if (context.mounted) {
+            chat.sendMessage('Send the first message');
             await Navigator.push(
               context,
               MaterialPageRoute(
